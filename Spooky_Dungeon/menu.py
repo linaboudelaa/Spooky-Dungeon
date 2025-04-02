@@ -187,8 +187,8 @@ class Interaction:
         self.button = button
         self.mouse = mouse
         self.bg_image = simplegui.load_image("https://i.imgur.com/k0HXINw.png") #image1
-        self.new_bg_image = simplegui.load_image("https://i.imgur.com/0WDWGdl.png") #image2
-        self.final_bg_image = simplegui.load_image("https://i.imgur.com/928ZLXD.png") #image3
+        self.new_bg_image = simplegui.load_image("https://i.imgur.com/c6es2xV.png") #image2
+        self.final_bg_image = simplegui.load_image("https://i.imgur.com/nWZ9iVX.png") #image3
         self.bg_state = 1  #1 is the original, 2 new and 3 final
             
         
@@ -196,7 +196,7 @@ class Interaction:
         canvas_width = WIDTH
         canvas_height = HEIGHT
         
-        
+     
         if self.bg_state == 1:
             bg_image = self.bg_image
         elif self.bg_state == 2:
@@ -225,20 +225,36 @@ class Interaction:
         
         
         if click_position:
+            tolerance = 50
+            exit_tolerance = 10
+            exit_position = Vector(617, 284)
+
             
             
+            if self.is_within_tolerance(click_position, exit_position, exit_tolerance):
+                exit()
+                    
             if self.bg_state == 1:
                 target_position = Vector(628, 195)
-                tolerance = 50
                 if self.is_within_tolerance(click_position, target_position, tolerance):
                     self.bg_state = 2
+                
                     
             elif self.bg_state == 2:
-                target_position = Vector(197, 250)
-                tolerance = 50
-                if self.is_within_tolerance(click_position, target_position, tolerance):
-                    self.bg_state = 3
-                    
+                target_positions = [Vector(197, 250), Vector(590, 245)]
+                back_position = Vector(55, 455)
+                for target_position in target_positions:
+                    if self.is_within_tolerance(click_position, target_position, tolerance):
+                        self.bg_state = 3
+                        break
+                if self.is_within_tolerance(click_position, back_position, tolerance):
+                    self.bg_state = 1
+            elif self.bg_state == 3:
+                back_position = Vector(60, 470)
+                if self.is_within_tolerance(click_position, back_position, tolerance):
+                    self.bg_state = 2
+                
+               
                     
                     
     def is_within_tolerance(self, click_position, target_position, tolerance):
@@ -247,6 +263,7 @@ class Interaction:
                              (click_position.y - target_position.y) ** 2)
         
         return distance <= tolerance
+    
 
 
 

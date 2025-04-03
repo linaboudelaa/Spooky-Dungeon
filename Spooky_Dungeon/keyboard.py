@@ -8,6 +8,7 @@ except ModuleNotFoundError:
             self.right = False
             self.left = False 
             self.z = False
+            self.x = False
 
         def keyDown(self, key):
             if key == simplegui.KEY_MAP['right']:
@@ -16,6 +17,8 @@ except ModuleNotFoundError:
                 self.left = True
             if key == simplegui.KEY_MAP['z']:
                 self.z = True
+            if key == simplegui.KEY_MAP['x']:
+                self.x = True
 
         def keyUp(self, key):
             if key == simplegui.KEY_MAP['right']:
@@ -24,3 +27,5 @@ except ModuleNotFoundError:
                 self.left = False
             if key == simplegui.KEY_MAP['z']:
                 self.z = False
+            if key == simplegui.KEY_MAP['x']:
+                self.x = False

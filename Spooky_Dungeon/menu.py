@@ -1,3 +1,11 @@
+from vector import Vector
+
+try:
+    import simplegui
+except ModuleNotFoundError:
+    import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
+
+
 class Button:
     def __init__(self, position, radius, colour, velocity = Vector(0,0)):
         self.position = position
